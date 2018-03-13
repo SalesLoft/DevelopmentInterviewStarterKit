@@ -9,13 +9,13 @@ const Page = styled.div`
   grid-template 46px 1fr / 1fr;
   height: 100%;
   width: 100%;
-`
+`;
 
 const FlexBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export const LandingPage = () => (
   <Page>
@@ -24,4 +24,4 @@ export const LandingPage = () => (
       <Intro />
     </FlexBox>
   </Page>
-)
+);

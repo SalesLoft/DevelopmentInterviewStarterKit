@@ -16,7 +16,7 @@ const theme = {
       dark: '#13073A',
     }
   }
-}
+};
 
 const App = ({ store }) => (
   <Provider store={store}>
@@ -26,10 +26,10 @@ const App = ({ store }) => (
       </Router>
     </ThemeProvider>
   </Provider>
-)
+);
 
 App.propTypes = {
   store: PropTypes.object.isRequired
-}
+};
 
 export default App
