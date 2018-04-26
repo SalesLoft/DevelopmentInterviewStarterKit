@@ -10,5 +10,7 @@ class SalesLoftApi
     response = get("/people.json", {
       headers: {'Authorization' => "Bearer #{Rails.application.secrets.api_key}"}
     })
+
+    response["data"]
   end
 end
