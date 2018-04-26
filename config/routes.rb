@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   end
 
   root to: "main#index"
+
+  get 'people', to: 'people#index'
 end
