@@ -1,0 +1,15 @@
+<table>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Job Title</th>
+  <% @people.each do |person| %>
+    <tr>
+      <td><%= person["display_name"] %></td>
+      <td><%= person["email_address"] %></td>
+      <td><%= person["title"] %></td>
+    </tr>
+  <% end %>
+</table>
+<br/>
+<%= will_paginate @people %>
+
