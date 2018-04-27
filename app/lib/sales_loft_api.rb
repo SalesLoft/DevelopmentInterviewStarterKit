@@ -7,7 +7,7 @@ class SalesLoftApi
 
   base_uri 'api.salesloft.com/v2/'
 
-  def self.get_people(current_page=nil)
+  def self.get_people(current_page = 1)
     query = { include_paging_counts: true }
     query[:page] = current_page if current_page.present?
 
@@ -17,6 +17,10 @@ class SalesLoftApi
     })
 
     paging = response["metadata"]["paging"]
-    response['data'].paginate(per_page: paging["per_page"], total_entries: paging["total_count"])
+
+    paginated = WillPaginate::Collection.create(current_page, paging["per_page"], paging["total_count"]) do |pager|
+      pager.replace(response['data'].to_a)
+    end
+    paginated
   end
 end
