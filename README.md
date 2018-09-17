@@ -30,7 +30,6 @@ bundle install
 4.) npm install
 ```
 npm install
-npm install webpack-dev-server -g
 ```
 5.) Create and migrate Sqlite Databases
 ```
