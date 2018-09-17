@@ -8,7 +8,6 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 var BUILD_DIR = path.resolve(__dirname, './client/dist');
 var APP_DIR = path.resolve(__dirname, './client/src');
-const port = parseInt(process.env.PORT) - 1
 
 var config = {
   entry: APP_DIR + '/index.js',
@@ -35,7 +34,6 @@ var config = {
   ],
 
   devServer: {
-    port,
     hot: true,
     hotOnly: true,
     allowedHosts: ['localhost'],
