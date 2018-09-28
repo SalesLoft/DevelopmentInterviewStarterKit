@@ -3,6 +3,8 @@
 This application is a jumping off point for the SalesLoft Development Interview,
 its designed to cut out boilerplate so you can get straight to coding.
 
+**For full-stack submissions**: Please build both a Rails back-end and a React front-end. Think carefully about the responsibilities of each component.
+
 Included in the package.
 
 - Rails 5 Application
