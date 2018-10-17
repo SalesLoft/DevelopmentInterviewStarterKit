@@ -1,6 +1,6 @@
 'use strict';
 
-require('dotenv').config()
+require('dotenv').config();
 var webpack = require('webpack');
 var path = require('path');
 
@@ -14,6 +14,7 @@ var config = {
   output: {
     path: BUILD_DIR,
     filename: 'app.js',
+    publicPath: `http://localhost:${process.env.WEBPACK_PORT}/`,
   },
   module: {
     loaders : [
@@ -30,7 +31,8 @@ var config = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin()
   ],
 
   devServer: {
