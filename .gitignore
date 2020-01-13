@@ -24,3 +24,6 @@
 public/app.js
 public/index.html
 .env
+
+# Ignore IDE project files
+/.project
