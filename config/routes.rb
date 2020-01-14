@@ -6,5 +6,7 @@ Rails.application.routes.draw do
     resources :people, only: [:index]
   end
 
+  match '*path', to: 'main#index', via: :all
+
   root to: "main#index"
 end
