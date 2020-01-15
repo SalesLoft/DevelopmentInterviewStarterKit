@@ -14,10 +14,22 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import DetailsModal from './People/DetailsModal';
+import PossibleDuplicatesModal from './People/PossibleDuplicatesModal';
 import '../styles/components/People.css';
 
 class People extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isInfoModalOpen: false,
+      isDuplicatesModalOpen: false,
+      personDetails: {},
+    };
+  }
+
+  componentDidMount() {
     this.props.peopleActions.getPeople();
   }
 
@@ -37,6 +49,7 @@ class People extends Component {
                 <TableRow>
                   <TableCell>Name</TableCell>
                   <TableCell>Email</TableCell>
+                  <TableCell>Job Title</TableCell>
                   <TableCell align="right"></TableCell>
                 </TableRow>
               </TableHead>
@@ -47,11 +60,27 @@ class People extends Component {
                       {pageResult.firstName + ' ' + pageResult.lastName}
                     </TableCell>
                     <TableCell>{pageResult.email}</TableCell>
+                    <TableCell>{pageResult.jobTitle}</TableCell>
                     <TableCell align="right">
-                      <IconButton color="primary" aria-label="get info">
+                      <IconButton
+                        color="primary"
+                        aria-label="get info"
+                        onClick={() => this.setState({
+                          isInfoModalOpen: true,
+                          personDetails: pageResult,
+                        })}
+                      >
                         <InfoIcon />
                       </IconButton>
-                      <IconButton color="primary" aria-label="check for duplicates">
+                      <IconButton
+                        color="primary"
+                        aria-label="check for duplicates"
+                        onClick={() => this.setState({
+                          isDuplicatesModalOpen: true,
+                          personDetails: pageResult,
+                          peopleDetails: pageData || [],
+                        })}
+                      >
                         <MergeTypeIcon />
                       </IconButton>
                     </TableCell>
@@ -65,6 +94,17 @@ class People extends Component {
           pagesTotal={pagesTotal}
           currentPage={pageNumber}
           onPageSelect={pageNumber => this.props.peopleActions.getPeople({ pageNumber })}
+        />
+        <DetailsModal
+          isOpen={this.state.isInfoModalOpen}
+          onClose={() => this.setState({ isInfoModalOpen: false })}
+          personDetails={this.state.personDetails}
+        />
+        <PossibleDuplicatesModal
+          isOpen={this.state.isDuplicatesModalOpen}
+          onClose={() => this.setState({ isDuplicatesModalOpen: false })}
+          personDetails={this.state.personDetails}
+          peopleDetails={pageData}
         />
       </div>
     );

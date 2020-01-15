@@ -25,6 +25,7 @@ export function people(state = initialState, action) {
           lastName: result.last_name,
           displayName: result.display_name,
           email: result.email_address,
+          jobTitle: result.title,
         })),
         pageNumber: action.data.metadata.paging.current_page,
         pagesTotal: action.data.metadata.paging.total_pages,
