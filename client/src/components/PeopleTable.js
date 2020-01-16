@@ -67,6 +67,7 @@ export default function PeopleTable(props) {
 
             props.setPeopleData(newData.data);
           })
+        });
       }}
       actions={[
         {
