@@ -5,7 +5,7 @@ import { ThemeProvider } from 'styled-components'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { LandingPage } from './LandingPage'
-import ConnectedPeople from '../containers/ConnectedPeople'
+import People from './People'
 
 const theme = {
   main: {
@@ -24,8 +24,8 @@ const App = ({ store }) => (
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
-          <Route exact path="/" component={LandingPage}/>
-          <Route exact path="/people" component={ConnectedPeople}/>
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/people" component={People} />
         </Switch>
       </Router>
     </ThemeProvider>

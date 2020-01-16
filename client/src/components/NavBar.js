@@ -5,6 +5,13 @@ const NAV_HEIGHT = 46;
 const AVATAR_HEIGHT = 40;
 const AVATAR_WIDTH = 40;
 
+const NavText = styled.p`
+  color: #4a90e2;
+  padding-right: 10px;
+  padding-left: 10px;
+  color: white;
+`;
+
 const StyledNavBar = styled.nav`
   display: flex;
   justify-content: flex-end;
@@ -14,43 +21,70 @@ const StyledNavBar = styled.nav`
   padding 0px;
   height: ${NAV_HEIGHT}px;
   width: 100%;
-`;
-
-let NavText = styled.p`
-  color: #4a90e2;
-  padding-right: 10px;
-  padding-left: 10px;
-  color: white;
+  /*background-color: #fff;*/
 `;
 
 const Badge = styled.div`
-  margin: 3px;
+  margin: 9px;
   display: flex;
-  min-width: 152px;
+  min-width: 120px;
   align-items: center;
   overflow: hidden;
-  border-radius: 7px;
-  border 2px solid #4a90e2;
+  border-radius: 14px;
+  /*border 2px solid #4a90e2;*/
   justify-content: center;
-  font-size: 25px;
-  font-weight: bold;
-  background-color: #4a90e2;
+  font-size: 16px;
+  /*font-weight: bold;*/
+  color: #fff;
+  background-color: #ff910e; /*#4a90e2;*/
+
+  :hover {
+    box-shadow: 0 0 0 1px #ff910e, 0 2px 24px rgba(0,0,0,0.35);
+  }
 `;
 
-let SignInBadge = () => (
+const Link = styled.a`
+  margin: 9px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 16px;
+  color: #fff;
+  opacity: 0.8;
+
+  :hover {
+    opacity: 1;
+  }
+`;
+
+const NavBarLink = props => (
+  <Link href={props.href}>{props.label}</Link>
+);
+
+const NavBarBadge = props => (
   <Badge>
-    <a href='/users/auth/salesloft' style={{textDecoration: 'none'}}><NavText>Login</NavText></a>
+    <a href={props.href} style={{textDecoration: 'none'}}>
+      <NavText>
+        {props.children}
+      </NavText>
+    </a>
   </Badge>
 );
 
-let UserBadge = ({user}) => (
-  <Badge>
-    <a href='/users/auth/logout' style={{textDecoration: 'none'}}><NavText>{user.name}</NavText></a>
-  </Badge>
+const SignInBadge = () => (
+  <NavBarBadge href='/users/auth/salesloft'>Login</NavBarBadge>
 );
 
-let NavBar = ({user}) => (
+const UserBadge = ({ user }) => (
+  <NavBarBadge href='/users/auth/logout'>{user.name}</NavBarBadge>
+);
+
+const NavBar = ({ user }) => (
   <StyledNavBar>
+    <NavBarLink href='/' label='Home' />
+    <NavBarLink href='/people' label='People' />
     {user ? <UserBadge user={user} /> : <SignInBadge />}
   </StyledNavBar>
 );

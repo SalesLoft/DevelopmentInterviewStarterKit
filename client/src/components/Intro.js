@@ -55,7 +55,7 @@ const Instructions = () => (
 )
 
 export const Intro = () => (
-  <Box>
+  <Box style={{ backgroundColor: 'white' }}>
     <Logo />
     <Instructions />
   </Box>
