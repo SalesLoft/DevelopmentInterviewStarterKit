@@ -79,8 +79,6 @@ const DuplicatesModal = props => {
   } = props,
     possibleDuplicates = getPossibleDuplicates(peopleData || []);
 
-  console.log('peopleData ==', peopleData);
-
   return (
     <Dialog
       open={isOpen}
@@ -103,9 +101,6 @@ const DuplicatesModal = props => {
       <MuiDialogActions>
         <Button autoFocus onClick={onClose} color="primary">
           Close
-        </Button>
-        <Button autoFocus onClick={() => console.log(getPossibleDuplicates(peopleData))} color="primary">
-          Check Duplicates
         </Button>
       </MuiDialogActions>
     </Dialog>

@@ -10,12 +10,27 @@ import Page from './Page';
 import DetailsModal from './People/DetailsModal';
 import DuplicatesModal from './People/DuplicatesModal';
 import PeopleTable from './PeopleTable';
-import { useForceUpdate } from '../utils';
+
+const fetchPeople = ({ page, limit }) => {
+  return fetch('/api/people?' + encodeGetParams({
+    page,
+    limit,
+  }))
+  .then(response => response.json());
+};
 
 export default function People() {
   const [ isInfoModalOpen, setIsInfoModalOpen ] = useState(false),
     [ isDuplicateModalOpen, setIsDuplicateModalOpen ] = useState(false),
     [ peopleData, setPeopleData ] = useState(null);
+
+  const getPeopleData = (params) => {
+    return fetchPeople(params)
+    .then(response => {
+      setPeopleData(response.data);
+      return response;
+    });
+  };
 
   return (
     <Page>
@@ -32,13 +47,10 @@ export default function People() {
         />
       </div>
       <PeopleTable
-        setPeopleData={setPeopleData}
-        setIsInfoModalOpen={setIsInfoModalOpen}
-        setIsDuplicateModalOpen={setIsDuplicateModalOpen}
+        getPeopleData={getPeopleData}
+        openInfoModal={() => setIsInfoModalOpen(true)}
+        openDuplicateModal={() => setIsDuplicateModalOpen(true)}
       />
-      {/*
-
-      */}
     </Page>
   );
 }

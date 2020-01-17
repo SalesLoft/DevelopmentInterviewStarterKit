@@ -5,14 +5,6 @@ export const merge = (...obj) => Object.assign({}, ...obj);
 export const encodeGetParams = params => Object.entries(params).map(kv => kv.map(encodeURIComponent).join('=')).join('&');
 
 /**
- * Custom Hook to force the update of a functional component
- */
-export function useForceUpdate(){
-  const [value, setValue] = useState(false);
-  return () => setValue(value => !value);
-}
-
-/**
  * Calculate the Levenshtein distance between two provided strings
  * @param  {String} a The first string to calculate the Levenshtein distance for
  * @param  {String} b The second string to calculate the Levenshtein distance for
