@@ -4,6 +4,21 @@ body {
   height: 100vh;
 }
 
+body:after {
+  content: "";
+  display: block;
+  background-color: #ddd;
+  background-image: -webkit-linear-gradient(top left,#42aedc,#2988c1);
+  background-image: linear-gradient(to bottom right,#42aedc,#2988c1);
+  background-attachment: fixed;
+  position: fixed;
+  top:0;
+  left:0;
+  height: 100%;
+  width: 100%;
+  z-index:-1;
+}
+
 #root {
   height: 100%;
   width: 100%;
