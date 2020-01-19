@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 import thunkMiddleware from 'redux-thunk'
 import { routerMiddleware } from 'react-router-redux'
 import { createStore, applyMiddleware } from 'redux';
-import createLogger from 'redux-logger';
 import App from './components/App'
 import Reducers from './reducers/CombinedReducers'
 
@@ -14,7 +13,7 @@ import createHistory from 'history/createBrowserHistory'
 import { fetchMe } from './actions/AsyncActions'
 
 const history = createHistory()
-const middlewares = [thunkMiddleware, createLogger(), routerMiddleware(history)]
+const middlewares = [thunkMiddleware, routerMiddleware(history)]
 let store = createStore(Reducers, applyMiddleware(...middlewares))
 
 window.store = store
