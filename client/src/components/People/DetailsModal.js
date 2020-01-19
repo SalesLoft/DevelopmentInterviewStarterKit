@@ -4,11 +4,23 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogContent from '@material-ui/core/DialogContent';
 import MuiDialogTitle from '@material-ui/core/DialogTitle';
 import MuiDialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
-import PeopleUtils from './PeopleUtils';
 
-function getCharacterFrequencies(string) {
+/**
+ * Get the frequency of each unique character in the provided string by descending frequency.
+ * @param  {string} string The string to use to count the frequency of all its unique characters
+ * @return {Array<Array<String, Number>>} An array of arrays where each inner array contains a unique
+ * character and a number indicating its frequency. Format:
+ * <pre>[
+ *   [
+ *     String: Number, // Each unique character maps to its frequency
+ *   ],
+ *   ... // The remaining unique characters in descending paired frequency
+ * ]</pre>
+ */
+export function getCharacterFrequencies(string) {
   // Get a map of all unique characters that appear in the provided string,
   // and map each character to the number of times it appears in the provided string
   let uniqueChars = {};
@@ -66,6 +78,11 @@ export default function DetailsModal(props) {
         ))}
         {!characterFrequencies && 'Loading...'}
       </MuiDialogContent>
+      <MuiDialogActions>
+        <Button autoFocus onClick={onClose}>
+          Close
+        </Button>
+      </MuiDialogActions>
     </Dialog>
   );
 }

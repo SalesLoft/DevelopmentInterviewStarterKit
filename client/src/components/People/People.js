@@ -1,15 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
-import MaterialTable from 'material-table';
-import axios from 'axios';
-import { encodeGetParams } from '../utils';
-import materialTableIcons from './MaterialTableIcons';
-import RefreshIcon from '@material-ui/icons/Refresh';
-import MergeTypeIcon from '@material-ui/icons/MergeType';
-import InfoIcon from '@material-ui/icons/Info';
-import Page from './Page';
-import DetailsModal from './People/DetailsModal';
-import DuplicatesModal from './People/DuplicatesModal';
+import React, { useState } from 'react';
+import Page from '../Page';
+import DetailsModal from './DetailsModal';
+import DuplicatesModal from './DuplicatesModal';
 import PeopleTable from './PeopleTable';
+import { encodeGetParams } from '../../utils';
 
 const fetchPeople = ({ page, limit }) => {
   return fetch('/api/people?' + encodeGetParams({

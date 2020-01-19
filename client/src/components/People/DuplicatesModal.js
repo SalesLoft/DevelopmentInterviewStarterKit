@@ -11,7 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { levDist } from '../../utils';
 
-const getPossibleDuplicates = people => {
+export const getPossibleDuplicates = people => {
   let peopleRecords = [...people];
   let possibleDuplicatesIds = {};
 
@@ -97,9 +97,8 @@ const DuplicatesModal = props => {
           </ul>
         </MuiDialogContent>
       ))}
-
       <MuiDialogActions>
-        <Button autoFocus onClick={onClose} color="primary">
+        <Button autoFocus onClick={onClose}>
           Close
         </Button>
       </MuiDialogActions>

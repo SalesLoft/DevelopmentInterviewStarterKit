@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
 import MaterialTable from 'material-table';
-import { encodeGetParams } from '../utils';
-import materialTableIcons from './MaterialTableIcons';
+import DetailsModal from './DetailsModal';
+import DuplicatesModal from './DuplicatesModal';
+import materialTableIcons from '../MaterialTable/MaterialTableIcons';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import MergeTypeIcon from '@material-ui/icons/MergeType';
 import InfoIcon from '@material-ui/icons/Info';
-import Page from './Page';
-import DetailsModal from './People/DetailsModal';
-import DuplicatesModal from './People/DuplicatesModal';
 
 export default function PeopleTable(props) {
-  const [ state, setState ] = useState({
-    pageSize: 10,
-    page: 1,
-    data: [],
-    totalCount: 0,
-  });
+  const [ pageSize, setPageSize ] = useState(10);
 
   return (
     <div style={{ margin: '20px 0' }}>
@@ -29,7 +22,7 @@ export default function PeopleTable(props) {
           { title: 'Email', field: 'email_address' },
         ]}
         options={{
-          pageSize: state.pageSize,
+          pageSize: pageSize,
           pageSizeOptions: [10, 25, 50, 100],
           sorting: false,
           search: false,
@@ -42,41 +35,37 @@ export default function PeopleTable(props) {
         }}
         data={query => {
           return new Promise((resolve, reject) => {
+            // Make a call to the API for the appropriate data
             props.getPeopleData({
               page: query.page + 1,
               limit: query.pageSize,
             })
             .then(result => {
-              const newData = {
+              // Keep the page size of the table in sync with its state
+              setPageSize(query.pageSize);
+
+              // Update the table with the appropriate data
+              resolve({
                 page: result.metadata.paging.current_page - 1,
                 data: result.data,
                 totalCount: result.metadata.paging.total_count,
-              };
-
-              /**/
-              setState(Object.assign({}, state, newData, {
-                pageSize: query.pageSize
-              }));
-              /**/
-              // setPageSize(query.pageSize);
-
-              resolve(newData);
+              });
             })
           });
         }}
         actions={[
+          {
+            icon: InfoIcon,
+            tooltip: 'List unique characters of all email addresses',
+            onClick: () => props.openInfoModal(),
+            isFreeAction: true,
+          },
           {
             icon: MergeTypeIcon,
             tooltip: 'Check for duplicate records',
             onClick: () => props.openDuplicateModal(),
             isFreeAction: true,
           },
-          {
-            icon: InfoIcon,
-            tooltip: 'List unique characters of all email addresses',
-            onClick: () => props.openInfoModal(),
-            isFreeAction: true,
-          }
         ]}
       />
     </div>
