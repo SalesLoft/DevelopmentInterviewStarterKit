@@ -29,7 +29,7 @@ const InstructionsBox = styled.div`
 
 const Logo = () => (
   <FlexBox>
-    <img src="/logo.svg" />
+    <img src="/logo.svg" alt="logo" />
     <h1>SalesLoft Developer Interview Kit</h1>
   </FlexBox>
 )
