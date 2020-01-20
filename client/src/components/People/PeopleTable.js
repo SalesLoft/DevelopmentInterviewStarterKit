@@ -98,13 +98,13 @@ function PeopleTable(props) {
           {
             icon: InfoIcon,
             tooltip: 'List unique characters of all email addresses',
-            onClick: () => props.openInfoModal(),
+            onClick: () => props.openDetailsModal(),
             isFreeAction: true,
           },
           {
             icon: MergeTypeIcon,
             tooltip: 'Check for duplicate records',
-            onClick: () => props.openDuplicateModal(),
+            onClick: () => props.openDuplicatesModal(),
             isFreeAction: true,
           },
           {
@@ -120,9 +120,9 @@ function PeopleTable(props) {
 }
 
 PeopleTable.propTypes = {
-  getPeopleData: PropTypes.func.isRequired,
-  openInfoModal: PropTypes.func.isRequired,
-  openDuplicateModal: PropTypes.func.isRequired,
+  getPeopleData: PropTypes.func.isRequired, // The function that fetches the People records needed for the table
+  openDetailsModal: PropTypes.func.isRequired, // The function that opens the Details modal
+  openDuplicatesModal: PropTypes.func.isRequired, // The function that opens the Duplicates modal
 };
 
 export default PeopleTable;

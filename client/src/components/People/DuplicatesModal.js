@@ -128,4 +128,16 @@ const DuplicatesModal = props => {
   );
 }
 
+DuplicatesModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired, // Whether this modal window is currently open
+  onClose: PropTypes.func.isRequired, // Function called when the modal indicates it is closing
+  peopleData: PropTypes.arrayOf(PropTypes.shape({ // The People records that may contain possible duplicates
+    id: PropTypes.Number,
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    title: PropTypes.string,
+    email_address: PropTypes.string,
+  })),
+};
+
 export default DuplicatesModal;

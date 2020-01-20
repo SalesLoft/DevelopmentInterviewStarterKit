@@ -44,7 +44,7 @@ export function getCharacterFrequencies(string) {
   return result;
 }
 
-export default function DetailsModal(props) {
+function DetailsModal(props) {
   const {
     onClose,
     isOpen,
@@ -86,3 +86,11 @@ export default function DetailsModal(props) {
     </Dialog>
   );
 }
+
+DetailsModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired, // Whether this modal window is currently open
+  onClose: PropTypes.func.isRequired, // Function called when the modal indicates it is closing
+  data: PropTypes.string, // The string to get all of its character's frequencies
+};
+
+export default DetailsModal;

@@ -13,8 +13,8 @@ const fetchPeople = ({ page, limit }) => {
 };
 
 export default function People() {
-  const [ isInfoModalOpen, setIsInfoModalOpen ] = useState(false),
-    [ isDuplicateModalOpen, setIsDuplicateModalOpen ] = useState(false),
+  const [ isDetailsModalOpen, setIsDetailsModalOpen ] = useState(false),
+    [ isDuplicatesModalOpen, setIsDuplicatesModalOpen ] = useState(false),
     [ peopleData, setPeopleData ] = useState(null);
 
   const getPeopleData = (params) => {
@@ -29,20 +29,20 @@ export default function People() {
     <Page>
       <div className='modals'>
         <DetailsModal
-          isOpen={isInfoModalOpen}
-          onClose={() => setIsInfoModalOpen(false)}
+          isOpen={isDetailsModalOpen}
+          onClose={() => setIsDetailsModalOpen(false)}
           data={peopleData && peopleData.map(person => person.email_address).join('')}
         />
         <DuplicatesModal
-          isOpen={isDuplicateModalOpen}
-          onClose={() => setIsDuplicateModalOpen(false)}
+          isOpen={isDuplicatesModalOpen}
+          onClose={() => setIsDuplicatesModalOpen(false)}
           peopleData={peopleData}
         />
       </div>
       <PeopleTable
         getPeopleData={getPeopleData}
-        openInfoModal={() => setIsInfoModalOpen(true)}
-        openDuplicateModal={() => setIsDuplicateModalOpen(true)}
+        openDetailsModal={() => setIsDetailsModalOpen(true)}
+        openDuplicatesModal={() => setIsDuplicatesModalOpen(true)}
       />
     </Page>
   );
