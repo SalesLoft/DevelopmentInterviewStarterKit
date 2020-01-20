@@ -116,6 +116,11 @@ const DuplicatesModal = props => {
           </ul>
         </MuiDialogContent>
       ))}
+      {possibleDuplicates.length === 0 ? (
+        <MuiDialogContent key='none-found' dividers>
+          No possible duplicates were detected.
+        </MuiDialogContent>
+      ) : ''}
       <MuiDialogActions>
         <Button autoFocus onClick={onClose}>
           Close
