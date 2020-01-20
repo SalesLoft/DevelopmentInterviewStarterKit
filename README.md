@@ -46,4 +46,8 @@ cp .env.sample .env
 bundle exec foreman start
 ```
 8.) Navigate to localhost:5000
+9.) Run tests
+```
+npm run test
+```
 
