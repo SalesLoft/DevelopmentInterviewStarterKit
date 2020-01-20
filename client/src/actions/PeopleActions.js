@@ -1,6 +1,6 @@
 import * as ApiActions from './ApiActions';
 import * as PeopleActionTypes from '../constants/PeopleConstants';
-import axios from 'axios';
+//import axios from 'axios';
 import { encodeGetParams } from '../utils';
 
 /**
@@ -12,10 +12,12 @@ import { encodeGetParams } from '../utils';
  * }</pre>
  */
 export const getPeople = ApiActions.make((settings = {}) => {
+  /*
   return axios.get('/api/people?' + encodeGetParams({
     page: settings.pageNumber || 1,
     // limit: settings.limit || 100,
   }));
+  */
 }, [
   PeopleActionTypes.GET_PEOPLE_REQUEST,
   PeopleActionTypes.GET_PEOPLE_SUCCESS,
