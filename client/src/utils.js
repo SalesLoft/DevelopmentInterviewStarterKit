@@ -5,6 +5,26 @@ export const merge = (...obj) => Object.assign({}, ...obj);
 export const encodeGetParams = params => Object.entries(params).map(kv => kv.map(encodeURIComponent).join('=')).join('&');
 
 /**
+ * Fetch data or a response from our internal API, which passes the authentication token to prevent CSRF attacks.
+ * @param  {string} apiEndpointUrl The URL of the interal API call to be made
+ * @param  {Object} [params={}]    The parameters that you would normally pass as the second argument to JavaScript's fetch() method.
+ * If the 'headers' key is provided in this parameter, it does not remove the default headers being passed unless explicitly overwritten.
+ * @return {Promise}               The Promise object which resolves with the API's response in a JSON object when the API response is received
+ */
+export const fetchFromApi = (apiEndpointUrl, params = {}) => {
+  return fetch(apiEndpointUrl, Object.assign({
+    method: 'GET',
+    headers: Object.assign({
+      'Accept': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-Token': document.querySelector("meta[name='csrf-token']").getAttribute('content'),
+    }, params.headers || {}),
+    credentials: 'same-origin',
+  }, params))
+  .then(response => response.json());
+};
+
+/**
  * Calculate the Levenshtein distance between two provided strings
  * @param  {String} a The first string to calculate the Levenshtein distance for
  * @param  {String} b The second string to calculate the Levenshtein distance for
