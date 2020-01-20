@@ -111,7 +111,7 @@ const DuplicatesModal = props => {
         <MuiDialogContent key={index} dividers>
           <ul>
             {duplicateGroup.map((person, index) => (
-              <li key={index}>{person.first_name + ' ' + person.last_name}&lt;{person.email_address}&gt;</li>
+              <li key={index}>{person.first_name + ' ' + person.last_name} &lt;{person.email_address}&gt;</li>
             ))}
           </ul>
         </MuiDialogContent>
