@@ -3,14 +3,13 @@ import Page from '../Page';
 import DetailsModal from './DetailsModal';
 import DuplicatesModal from './DuplicatesModal';
 import PeopleTable from './PeopleTable';
-import { encodeGetParams } from '../../utils';
+import { fetchFromApi, encodeGetParams } from '../../utils';
 
 const fetchPeople = ({ page, limit }) => {
-  return fetch('/api/people?' + encodeGetParams({
+  return fetchFromApi('/api/people?' + encodeGetParams({
     page,
     limit,
-  }))
-  .then(response => response.json());
+  }));
 };
 
 export default function People() {
@@ -47,4 +46,4 @@ export default function People() {
       />
     </Page>
   );
-}
+};
