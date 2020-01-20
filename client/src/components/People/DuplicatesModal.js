@@ -11,6 +11,28 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { levDist } from '../../utils';
 
+/**
+ * Get a list of People records that could be possible duplicates of each other
+ * @param  {Array<Object>} people People records returned from the People API. Format:
+ * <pre>[
+ *  { // Person record
+ *    'id': Number, // The person's ID
+ *    'first_name': String, // The person's first name
+ *    'last_name': String, // The person's last name
+ *    'title': String, // The person's job title
+ *    'email_address': String, // The person's email address
+ *  },
+ *  ... // The remaining Person records
+ * ]</pre>
+ * @return {Array<Array>} A list of arrays filled with possible duplicates. Format:
+ * <pre>[
+ *  [ // Set of possible duplicates
+ *    Object, // Person record (see Person record described within the "people" parameter)
+ *    ... // All other People records that could be a possible duplicate with the first People record in this array
+ *  ],
+ *  ... // All other sets of possible duplicates
+ * ]</pre>
+ */
 export const getPossibleDuplicates = people => {
   let peopleRecords = [...people];
   let possibleDuplicatesIds = {};
@@ -27,7 +49,7 @@ export const getPossibleDuplicates = people => {
       peopleRecords.forEach(person => {
         let addPossibleDuplicate = false;
         if (!isAlreadyPossibleDuplicate(person)) {
-          if (levDist(person.email_address, currentPerson.email_address) === 1) {
+          if (levDist(person.email_address, currentPerson.email_address) <= 1) {
             if (person.email_address[0] !== currentPerson.email_address[0]) {
               // If the first letter of their email is the only difference,
               // and if the first letter is NOT also the first letter of their

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import MaterialTable from 'material-table';
 import DetailsModal from './DetailsModal';
 import DuplicatesModal from './DuplicatesModal';
@@ -9,10 +9,12 @@ import InfoIcon from '@material-ui/icons/Info';
 
 export default function PeopleTable(props) {
   const [ pageSize, setPageSize ] = useState(10);
+  const tableRef = useRef(null);
 
   return (
     <div style={{ margin: '20px 0' }}>
       <MaterialTable
+        tableRef={tableRef}
         icons={materialTableIcons}
         title="People"
         columns={[
@@ -51,6 +53,7 @@ export default function PeopleTable(props) {
                 totalCount: result.metadata.paging.total_count,
               });
             })
+            .catch(error => () => reject())
           });
         }}
         actions={[
@@ -64,6 +67,14 @@ export default function PeopleTable(props) {
             icon: MergeTypeIcon,
             tooltip: 'Check for duplicate records',
             onClick: () => props.openDuplicateModal(),
+            isFreeAction: true,
+          },
+          {
+            icon: RefreshIcon,
+            tooltip: 'Refresh table data',
+            onClick: () => {
+              tableRef && tableRef.current.onQueryChange();
+            },
             isFreeAction: true,
           },
         ]}
