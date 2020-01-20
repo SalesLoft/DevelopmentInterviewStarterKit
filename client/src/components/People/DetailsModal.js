@@ -14,7 +14,8 @@ import Dialog from '@material-ui/core/Dialog';
  * character and a number indicating its frequency. Format:
  * <pre>[
  *   [
- *     String: Number, // Each unique character maps to its frequency
+ *     String,  // A unique character found in the provided string
+ *     Number // The number of times (frequency) the unique character found appears in the provided string
  *   ],
  *   ... // The remaining unique characters in descending paired frequency
  * ]</pre>
