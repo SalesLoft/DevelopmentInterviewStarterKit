@@ -2,11 +2,10 @@
 <html>
 <head>
   <title>SalesLoft Integration</title>
+  <%= csrf_meta_tags %>
 </head>
 <body>
-
 <%= yield %>
-
 <script src=<%= "http://localhost:#{ENV['WEBPACK_PORT']}/app.js" %>></script>
 </body>
 </html>
