@@ -42,7 +42,7 @@ const Instructions = () => (
     <p>
       This app is built with a Rails backend and a React frontend,
       use whatever you'd like out of this repo,
-      or any other framework/langauge. Refer to the
+      or any other framework/language. Refer to the
       <a href="https://docs.google.com/document/d/1SbhRTd6ewr0w1rgE-nB8yk7LR1exy8rL0JJCMAwgfns/edit?ts=5a57d0ac"> instructions</a>.
     </p>
     <p style={{textAlign: 'center'}}>
