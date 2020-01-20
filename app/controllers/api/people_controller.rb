@@ -1,6 +1,4 @@
 class Api::PeopleController < Api::BaseController
-  protect_from_forgery with: :null_session
-
   respond_to :json
 
   def index
@@ -21,7 +19,7 @@ class Api::PeopleController < Api::BaseController
         "Authorization" => "Bearer " + ENV["SALESLOFT_API_KEY"],
         "Content-Type" => "application/json"
       }
-      # , debug_output: STDOUT, # To show that User-Agent is Httparty
+      #, debug_output: STDOUT
     })
     render json: response
   end
@@ -29,19 +27,45 @@ class Api::PeopleController < Api::BaseController
   def create
     params.permit(:first_name, :last_name, :title, :email_address)
 
-    #json_params = ActionController::Parameters.new( JSON.parse(request.body.read) )
-
     body = JSON.parse(request.body.read)
-
-    logger.debug "POST BODY: #{body}"
 
     response = HTTParty.post("https://api.salesloft.com/v2/people.json", {
       headers: {
         "Authorization" => "Bearer " + ENV["SALESLOFT_API_KEY"],
         "Content-Type" => "application/x-www-form-urlencoded,application/json"
       },
-      :body => body,
-      debug_output: STDOUT, # To show that User-Agent is Httparty
+      :body => body
+    })
+    render json: response
+  end
+
+  def update
+    params.permit(:id)
+    id = params[:id]
+
+    # Get the content to update with and remove any nil values (which the API does not like being present)
+    body = JSON.parse(request.body.read)
+    body.delete_if { |k,v| v.nil? }
+
+    response = HTTParty.put("https://api.salesloft.com/v2/people/#{id}.json", {
+      headers: {
+        "Authorization" => "Bearer " + ENV["SALESLOFT_API_KEY"],
+        "Content-Type" => "application/x-www-form-urlencoded,application/json"
+      },
+      :body => body
+    })
+    render json: response
+  end
+
+  def destroy
+    params.permit(:id)
+    id = params[:id]
+
+    response = HTTParty.delete("https://api.salesloft.com/v2/people/#{id}.json", {
+      headers: {
+        "Authorization" => "Bearer " + ENV["SALESLOFT_API_KEY"],
+        "Content-Type" => "application/x-www-form-urlencoded,application/json"
+      }
     })
     render json: response
   end

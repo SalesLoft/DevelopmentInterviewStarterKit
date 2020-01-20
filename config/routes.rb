@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: "json" } do
     get :me, to: 'me#me'
-    resources :people, only: [:index, :create]
+    resources :people, only: [:index, :create, :destroy, :update]
   end
 
   match '*path', to: 'main#index', via: :all
