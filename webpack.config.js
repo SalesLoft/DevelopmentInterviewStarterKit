@@ -1,48 +1,34 @@
-'use strict';
-
-require('dotenv').config()
 var webpack = require('webpack');
 var path = require('path');
-
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-
 var BUILD_DIR = path.resolve(__dirname, './client/dist');
 var APP_DIR = path.resolve(__dirname, './client/src');
 
-var config = {
-  entry: APP_DIR + '/index.js',
+// Add indicator for whether the ReactJS app is within its DEV environment
+var devFlagPlugin = new webpack.DefinePlugin({
+  __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
+});
+
+module.exports = {
+  entry: './client/src/index.js',
   output: {
     path: BUILD_DIR,
-    filename: 'app.js',
+    filename: 'app.js'
   },
   module: {
-    loaders : [
+    rules: [
       {
-        test: /\.jsx?/,
-        include: APP_DIR,
-        loader: 'babel-loader'
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        }
       },
       {
         test: /\.css$/,
         include: APP_DIR,
-        loader: [ 'style-loader', 'css-loader' ]
+        use: [ 'style-loader', 'css-loader' ]
       }
     ]
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ],
-
-  devServer: {
-    hot: true,
-    hotOnly: true,
-    allowedHosts: ['localhost'],
-    host: 'localhost',
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-    },
-    contentBase: BUILD_DIR,
-  }
+  plugins: [devFlagPlugin]
 };
-
-module.exports = config;
