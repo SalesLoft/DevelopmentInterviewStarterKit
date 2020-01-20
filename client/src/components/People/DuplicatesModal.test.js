@@ -1,5 +1,15 @@
 import { getPossibleDuplicates } from './DuplicatesModal';
 
+const onePersonInPeopleData = [
+  {
+    id: 1,
+    first_name: 'Kyle',
+    last_name: 'Porter',
+    title: 'CEO',
+    email_address: 'kporter@salesloft.com',
+  },
+];
+
 const peopleDataWithTwoSetsOfDuplicates = [
   {
     id: 1,
@@ -131,5 +141,15 @@ it('People with similar email addresses but with no possible duplicates detected
   const testResult = getPossibleDuplicates(
     peopleDataWithManySameLastNamesAndNoDuplicates
   );
+  expect(testResult.length).toBe(0);
+});
+
+it('Finds no possible duplicates when there are 0 people provided', () => {
+  const testResult = getPossibleDuplicates([]);
+  expect(testResult.length).toBe(0);
+});
+
+it('Finds no possible duplicates when there is only 1 person provided', () => {
+  const testResult = getPossibleDuplicates(onePersonInPeopleData);
   expect(testResult.length).toBe(0);
 });
