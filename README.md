@@ -41,13 +41,13 @@ bundle exec rake db:create && bundle exec rake db:migrate
 ```
 cp .env.sample .env
 ```
-7.) Start the development server
-```
-bundle exec foreman start
-```
-8.) Navigate to localhost:5000
-9.) Run tests
+7.) Run tests
 ```
 npm run test
 ```
+8.) Start the development server
+```
+bundle exec foreman start
+```
+9.) Navigate to localhost:5000
 
