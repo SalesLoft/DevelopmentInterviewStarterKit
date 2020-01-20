@@ -20,7 +20,7 @@ Included in the package.
 ```
 ruby --version
 ```
-2.) Make sure your node version is above 8.5.0
+2.) Make sure your node version is above or equal to 8.10.0
 ```
 node --version
 ```
@@ -37,7 +37,7 @@ npm install
 ```
 bundle exec rake db:create && bundle exec rake db:migrate
 ```
-6.) Copy the .env.sample to .env and fill out the values
+6.) Copy the .env.sample to .env and fill out the values (note that **SALESLOFT_API_KEY** is needed for API calls)
 ```
 cp .env.sample .env
 ```
