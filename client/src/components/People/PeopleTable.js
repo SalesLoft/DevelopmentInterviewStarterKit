@@ -1,15 +1,16 @@
 import React, { useRef, useState } from 'react';
+import PropTypes from 'prop-types';
 import MaterialTable from 'material-table';
-import DetailsModal from './DetailsModal';
-import DuplicatesModal from './DuplicatesModal';
 import materialTableIcons from '../MaterialTable/MaterialTableIcons';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import MergeTypeIcon from '@material-ui/icons/MergeType';
 import InfoIcon from '@material-ui/icons/Info';
+import { fetchFromApi } from '../../utils';
 
-export default function PeopleTable(props) {
-  const [ pageSize, setPageSize ] = useState(10);
-  const tableRef = useRef(null);
+function PeopleTable(props) {
+  const [ pageSize, setPageSize ] = useState(10),
+    tableRef = useRef(null),
+    refreshTable = () => (tableRef && tableRef.current.onQueryChange());
 
   return (
     <div style={{ margin: '20px 0' }}>
@@ -53,8 +54,45 @@ export default function PeopleTable(props) {
                 totalCount: result.metadata.paging.total_count,
               });
             })
-            .catch(error => () => reject())
+            .catch(() => reject())
           });
+        }}
+        editable={{
+          onRowAdd: newData => {
+            return new Promise((resolve, reject) => {
+              fetchFromApi('/api/people', {
+                method: 'POST',
+                body: JSON.stringify(newData),
+              })
+              .then(() => {
+                resolve();
+                refreshTable();
+              });
+            })
+          },
+          onRowUpdate: (newData, oldData) => {
+            return new Promise((resolve, reject) => {
+              fetchFromApi('/api/people/' + oldData.id, {
+                method: 'PUT',
+                body: JSON.stringify(newData),
+              })
+              .then(() => {
+                resolve();
+                refreshTable();
+              });
+            });
+          },
+          onRowDelete: oldData => {
+            return new Promise((resolve, reject) => {
+              fetchFromApi('/api/people/' + oldData.id, {
+                method: 'DELETE',
+              })
+              .then(() => {
+                resolve();
+                refreshTable();
+              });
+            })
+          }
         }}
         actions={[
           {
@@ -72,9 +110,7 @@ export default function PeopleTable(props) {
           {
             icon: RefreshIcon,
             tooltip: 'Refresh table data',
-            onClick: () => {
-              tableRef && tableRef.current.onQueryChange();
-            },
+            onClick: () => refreshTable(),
             isFreeAction: true,
           },
         ]}
@@ -82,3 +118,11 @@ export default function PeopleTable(props) {
     </div>
   );
 }
+
+PeopleTable.propTypes = {
+  getPeopleData: PropTypes.func.isRequired,
+  openInfoModal: PropTypes.func.isRequired,
+  openDuplicateModal: PropTypes.func.isRequired,
+};
+
+export default PeopleTable;
