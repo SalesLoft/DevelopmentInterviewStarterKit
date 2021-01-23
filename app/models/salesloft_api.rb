@@ -4,7 +4,7 @@ class SalesloftApi
     @authentication = authentication
   end
 
-  def show_people
+  def people
     response = RestClient.get base_url + 'people', headers
     JSON.parse(response.body)
   end
