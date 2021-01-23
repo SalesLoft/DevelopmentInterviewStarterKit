@@ -7,13 +7,11 @@ describe SalesloftApi do
 
   describe '#people' do
     before(:each) do
-      stub_request(:get, 'https://api.salesloft.com/v2/people').
-        with(headers:{Authorization: "Bearer #{ENV['SALESLOFT_API_KEY']}"}).
-        to_return(status: 200, body: '["people"]', headers: {})
+      stub_salesloft_people
     end
 
     it 'returns the body of the api request' do
-      expect(@api.people).to eq(['people'])
+      expect(@api.people).to eq(JSON.parse(fake_salesloft_people))
     end
   end
 end
