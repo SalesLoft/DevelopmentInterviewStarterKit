@@ -11,7 +11,8 @@ describe SalesloftApi do
     end
 
     it 'returns the body of the api request' do
-      expect(@api.people).to eq(JSON.parse(fake_salesloft_people))
+      expected_result = JSON.parse(fake_salesloft_people)
+      expect(@api.people).to eq(expected_result)
     end
   end
 end
