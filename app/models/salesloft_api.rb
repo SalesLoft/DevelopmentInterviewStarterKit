@@ -5,12 +5,7 @@ class SalesloftApi
   end
 
   def show_people
-    if authentication == 'api_key'
-      response = RestClient.get base_url + 'people', headers
-    else
-      raise 'unrecognized authentication type'
-    end
-
+    response = RestClient.get base_url + 'people', headers
     JSON.parse(response.body)
   end
   
@@ -22,7 +17,13 @@ class SalesloftApi
   end
 
   def headers
-    { Authorization: "Bearer #{api_key}" }
+    if authentication == 'api_key'
+      key = api_key
+    else
+      raise 'unrecognized authentication type'
+    end
+
+    { Authorization: "Bearer #{key}" }
   end
 
   def api_key
