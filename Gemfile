@@ -20,6 +20,7 @@ gem 'omniauth'
 gem 'foreman'
 gem 'rake'
 gem 'dotenv-rails'
+gem 'rest-client'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
