@@ -28,6 +28,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 4.0.2'
+  gem 'webmock', '~> 3.11.1'
 end
 
 group :development do
