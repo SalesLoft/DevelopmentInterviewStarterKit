@@ -24,15 +24,14 @@ class Algorithm
     transposition?(string1, string2)
   end
 
-  def self.transposition?(string1, string2, position = 0)
-    return false if position == 0 && (string1 == string2 || string1.length != string2.length)
-    return true if string1.length == position
+  def self.transposition?(string1, string2)
+    return false if string1 == string2 || string1.length != string2.length
 
-    if string1[position] == string2[position] || string1[position] == string2[position - 1] || string1[position] == string2[position + 1]
-      return transposition?(string1, string2, position += 1)
+    string1.chars.each_with_index do |char, index|
+      return false unless char == string2[index] || char == string2[index - 1] || char == string2[index + 1]
     end
 
-    false
+    true
   end
 
   def self.count_and_sort_uniq_characters(obj)
