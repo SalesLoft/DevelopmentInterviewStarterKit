@@ -2,13 +2,15 @@ require 'rails_helper'
 
 describe Api::PeopleController do
   describe "#index" do
-    it "should be successful" do
+    before(:each) do
       get :index
+    end
+    
+    it "should be successful" do
       expect(response).to be_successful
     end
 
     it "should be formatted correctly" do
-      get :index
       data = JSON.parse(response.body)
       expected_count = JSON.parse(fake_salesloft_people)["data"].count
 
@@ -20,6 +22,27 @@ describe Api::PeopleController do
         expect(person.keys).to include "display_name"
         expect(person.keys).to include "email_address"
         expect(person.keys).to include "title"
+      end
+    end
+  end
+
+  describe "#email_character_count" do
+    before(:each) do
+      get :email_character_count
+    end
+
+    it "should be successful" do
+      expect(response).to be_successful
+    end
+
+    it "should be formatted correctly" do
+      data = JSON.parse(response.body)
+
+      expect(data).to be_an Array
+      data.each do |character_count|
+        expect(character_count).to be_a Array
+        expect(character_count[0]).to be_a String
+        expect(character_count[1]).to be_a Integer
       end
     end
   end

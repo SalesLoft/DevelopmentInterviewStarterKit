@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: "json" } do
     get :me, to: 'me#me'
 
+    get 'people/email_character_count', to: 'people#email_character_count', as: 'people_email_character_count'
+
     resources :people, only: [:index]
   end
 
