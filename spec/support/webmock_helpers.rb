@@ -1,7 +1,7 @@
 module WebmockHelpers
   def stub_salesloft_people
-    stub_request(:get, 'https://api.salesloft.com/v2/people').
-        with(headers:{Authorization: "Bearer #{ENV['SALESLOFT_API_KEY']}"}).
+    stub_request(:get, "https://api.salesloft.com/v2/people").
+        with(headers:{Authorization: "Bearer #{ENV["SALESLOFT_API_KEY"]}"}).
         to_return(status: 200, body: fake_salesloft_people, headers: {})
   end
 

@@ -20,7 +20,7 @@ class Person
   def self.all
     api = SalesloftApi.new
 
-    api.people['data'].map { |person| Person.new(person) }
+    api.people["data"].map { |person| Person.new(person) }
   end
 
 end
