@@ -6,3 +6,10 @@ export function receiveMe(me) {
     me
   }
 }
+
+export function updatePeople(people) {
+  return {
+    type: 'UPDATE_PEOPLE',
+    people
+  }
+}
