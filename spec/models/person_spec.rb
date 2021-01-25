@@ -43,4 +43,14 @@ describe Person do
       expect(Person.possible_duplicate_emails).to eq(expected_result)
     end
   end
+
+  describe ".last_salesloft_update" do
+    it "returns the most recent salesloft_updated_at value" do
+      person1 = create(:person, salesloft_updated_at: "2020-01-20T04:46:19.961197-05:00")
+      person2 = create(:person, salesloft_updated_at: "2020-01-20T09:46:19.961197-05:00")
+      
+      expect(Person.last_salesloft_update).to eq(person2.salesloft_updated_at)
+    end
+  end
+
 end
