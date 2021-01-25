@@ -7,8 +7,8 @@ class SalesloftApi
   # The instructions don"t specify that we must get the whole list of people, but just a list. In a real project i would get clarification on this, but for now I"ll just grab the first page. 
   # To get the whole list I might cycle through the pages using the "next_page" value and stopping when the value is null, reconstructing the results of each page into one array.
   # With scailing in mind, I might use a chron job to regularly check the api using the updated_at parameter to get only the changes since last check. This would populate the local DB, and methods would work from that data.
-  def people
-    response = RestClient.get base_url + "people", headers
+  def people(page: nil, updated_at: nil)
+    response = RestClient.get base_url + "people", headers.merge(params(page, updated_at))
     JSON.parse(response.body)
   end
   
@@ -27,6 +27,15 @@ class SalesloftApi
     end
 
     { Authorization: "Bearer #{key}" }
+  end
+
+  def params(page, updated_at)
+    params = {}
+    params["page"] = page if page
+    params["updated_at[gte]"] = updated_at if updated_at
+
+    return {} unless params.present?
+    {params: params}
   end
 
   def api_key
