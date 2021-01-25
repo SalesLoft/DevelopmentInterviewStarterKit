@@ -29,6 +29,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails', '~> 4.0.2'
   gem 'webmock', '~> 3.11.1'
+  gem 'factory_bot_rails', '~> 6.1.0'
 end
 
 group :development do
