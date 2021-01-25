@@ -10,4 +10,10 @@ class Api::PeopleController < Api::BaseController
 
     render json: @count.to_json, status: :ok
   end
+
+  def email_dups
+    @dups = Person.possible_duplicate_emails
+
+    render json: @dups.to_json, status: :ok
+  end
 end

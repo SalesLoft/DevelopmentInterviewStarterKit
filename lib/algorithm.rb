@@ -1,9 +1,4 @@
 class Algorithm
-  # ways to detect possible duplicates
-  # transposed letters: character count will be the same
-  # missed letter or accitental extra letter: character caount will be off by one, removing the extra letter would create a match
-  # return possible duplicates as an array of arrays (pairs of duplicates)
-
   def self.possible_duplicates_list(array)
     working_array = array.dup
 
