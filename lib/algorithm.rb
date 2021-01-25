@@ -5,12 +5,13 @@ class Algorithm
   # return possible duplicates as an array of arrays (pairs of duplicates)
 
   def self.possible_duplicates_list(array)
+    working_array = array.dup
+
     list = []
+    while working_array.length > 1
+      string1 = working_array.shift
 
-    while array.length > 1
-      string1 = array.shift
-
-      array.each do |string2|
+      working_array.each do |string2|
         if possible_duplicates?(string1, string2)
           list << [string1, string2]
         end
@@ -21,7 +22,7 @@ class Algorithm
   end
   
   def self.possible_duplicates?(string1, string2)
-    transposition?(string1, string2)
+    transposition?(string1, string2) || stray_character?(string1, string2)
   end
 
   def self.transposition?(string1, string2)
@@ -32,6 +33,19 @@ class Algorithm
     end
 
     true
+  end
+
+  def self.stray_character?(string1, string2)
+    short, long = [string1.dup, string2.dup].sort_by { |string| string.length }
+
+    return false unless long.length == short.length + 1
+
+    long.chars.each_with_index do |char, index|
+      next if char == short[index]
+
+      long.slice!(index)
+      return short == long
+    end
   end
 
   def self.count_and_sort_uniq_characters(obj)
