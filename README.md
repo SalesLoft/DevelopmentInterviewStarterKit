@@ -47,3 +47,7 @@ bundle exec foreman start
 ```
 8.) Navigate to localhost:5000
 
+## Message to the Reviewer
+Thank you so much for this opportunity, and for taking the time to review my offline exercise. I honestly had a lot of fun working on it.
+
+To be completely candid, my React skills are very rusty. I haven't worked on a React project in almost 2 years. In the interest of showcasing my strenghts I spent the bulk of my time working on the Rails backend. However, if you are interested in seeing where my React skills were at a time when they were practiced, you can take a look at this project: https://github.com/LastSacred/personal_hots_coach. This was a personal project built entirely by me. I'm very motivated to get a full-stack position, so all of my skills will stay sharp.
