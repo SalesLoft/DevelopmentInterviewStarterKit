@@ -6,6 +6,6 @@ module WebmockHelpers
   end
 
   def fake_salesloft_people
-    '{"data":[{"id":1,"display_name":"Bob Ross","email_address":"happytrees@salesloft.com","title":"Painter"},{"id":2,"display_name":"Batman","email_address":"batcave@salesloft.com","title":"Bringer of Justice"},{"id":3,"display_name":"Salvador dali","email_address":"meltedclock@salesloft.com","title":"Painter"}]}'
+    '{"data":[{"id":1,"display_name":"Bob Ross","email_address":"happytrees@salesloft.com","title":"Painter"},{"id":2,"display_name":"Batman","email_address":"batcave@salesloft.com","title":"Bringer of Justice"},{"id":3,"display_name":"Salvador dali","email_address":"meltedclock@salesloft.com","title":"Painter"},{"id":4,"display_name":"Bob Ross","email_address":"happytreees@salesloft.com","title":"Painter"},{"id":5,"display_name":"Batman","email_address":"bactave@salesloft.com","title":"Bringer of Justice"}]}'
   end
 end

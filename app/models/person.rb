@@ -11,9 +11,15 @@ class Person
   end
 
   def self.email_character_count
-    emails = all.map(&:email_address)
-
     Algorithm.count_and_sort_uniq_characters(emails)
+  end
+
+  def self.possible_duplicate_emails
+    Algorithm.possible_duplicates_list(emails)
+  end
+
+  def self.emails
+    all.map(&:email_address)
   end
 
   # abstracts from the api. this would make it easy to convert to using local persistance instead of api for every request.

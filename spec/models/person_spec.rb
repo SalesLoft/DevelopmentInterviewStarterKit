@@ -27,4 +27,20 @@ describe Person do
       end
     end
   end
+
+  describe ".emails" do
+    it "should retern an array of all peoples' emails" do
+      expected_result = JSON.parse(fake_salesloft_people)["data"].map { |person| person["email_address"] }
+
+      expect(Person.emails).to eq(expected_result)
+    end
+  end
+
+  describe ".possible_duplicate_emails" do
+    it "should return possible duplicates" do
+      expected_result = [["happytrees@salesloft.com", "happytreees@salesloft.com"], ["batcave@salesloft.com", "bactave@salesloft.com"]]
+
+      expect(Person.possible_duplicate_emails).to eq(expected_result)
+    end
+  end
 end
