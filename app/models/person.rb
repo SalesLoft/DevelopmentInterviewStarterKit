@@ -1,15 +1,6 @@
 require 'algorithm'
 
-class Person
-  attr_accessor :id, :display_name, :email_address, :title
-
-  def initialize(attributes = {})
-    @id = attributes["id"]
-    @display_name = attributes["display_name"]
-    @email_address = attributes["email_address"]
-    @title = attributes["title"]
-  end
-
+class Person < ApplicationRecord
   def self.email_character_count
     Algorithm.count_and_sort_uniq_characters(emails)
   end
@@ -22,11 +13,11 @@ class Person
     all.map(&:email_address)
   end
 
-  # abstracts from the api. this would make it easy to convert to using local persistance instead of api for every request.
-  def self.all
+  def self.all(api_only: true)
+    return super() unless api_only
+
     api = SalesloftApi.new
 
-    api.people["data"].map { |person| Person.new(person) }
+    api.people["data"].map { |person| Person.new(person.slice("id", "display_name", "email_address", "title")) }
   end
-
 end

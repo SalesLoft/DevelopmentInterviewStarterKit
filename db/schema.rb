@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180114224612) do
+ActiveRecord::Schema.define(version: 20210125021352) do
+
+  create_table "people", force: :cascade do |t|
+    t.string "display_name"
+    t.string "email_address"
+    t.string "title"
+    t.string "salesloft_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "tokens", force: :cascade do |t|
     t.string "access_token"
